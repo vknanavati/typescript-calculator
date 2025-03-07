@@ -3,7 +3,7 @@ import { Container } from '@mui/material';
 import { CreateBudget } from './components/CreateBudget';
 import { BudgetCard } from './components/BudgetCard';
 import { AddExpenseForm } from './components/AddExpenseForm';
-import { HandleAddExpense } from './types';
+import { HandleAddExpense, HandleCloseExpense } from './types';
 
 function App() {
 
@@ -15,7 +15,10 @@ function App() {
 
   const handleAddExpense: HandleAddExpense = () => {
     setIsOpenDialog(true)
+  }
 
+  const handleCloseExpense: HandleCloseExpense = () => {
+    setIsOpenDialog(false)
   }
 
   return (
@@ -24,7 +27,7 @@ function App() {
       {name && amount && (
         <BudgetCard name={name} amount={amount} total={total} onAddExpense={handleAddExpense}/>
       )}
-      <AddExpenseForm open={isOpenDialog}/>
+      <AddExpenseForm open={isOpenDialog} onCloseExpense={handleCloseExpense}/>
    </Container>
   );
 }
