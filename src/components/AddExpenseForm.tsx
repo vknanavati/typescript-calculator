@@ -1,12 +1,13 @@
 import { Dialog, DialogContent, DialogTitle, TextField, Box, Button, DialogActions } from "@mui/material";
-import { DialogOpenState, HandleCloseExpense } from "../types";
+import { DialogOpenState, HandleCloseExpense, SetExpenseDescription } from "../types";
 
 interface AddExpenseFormProps {
     open: DialogOpenState
     onCloseExpense: HandleCloseExpense
+    setExpenseDescription: SetExpenseDescription
 }
 
-export function AddExpenseForm({open, onCloseExpense}: AddExpenseFormProps) {
+export function AddExpenseForm({open, onCloseExpense, setExpenseDescription}: AddExpenseFormProps) {
   return (
     <Dialog open={open}>
         <DialogTitle>Expense</DialogTitle>
