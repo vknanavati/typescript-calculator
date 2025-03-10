@@ -1,13 +1,14 @@
 import { Box, Typography, Button } from '@mui/material';
-import { Amount, Name, Total, HandleAddExpense } from '../types';
+import { Amount, Name, Total, HandleAddExpense, Expenses } from '../types';
 
 interface BudgetCardProps {
     name: Name
     amount: Amount
     total: Total
     onAddExpense: HandleAddExpense
+    expenses: Expenses
 }
-export function BudgetCard({name, amount, total, onAddExpense}: BudgetCardProps) {
+export function BudgetCard({name, amount, total, onAddExpense, expenses}: BudgetCardProps) {
 
 
   return (
@@ -23,6 +24,18 @@ export function BudgetCard({name, amount, total, onAddExpense}: BudgetCardProps)
             <Typography>{name}</Typography>
             <Typography>{amount}/{total}</Typography>
         </Box>
+
+        {expenses.length > 0 && (
+          <Box mt={2}>
+            <Typography variant="h6">Expenses:</Typography>
+            {expenses.map((expense, index) => (
+              <Box key={index} display="flex" justifyContent="space-between">
+                <Typography>{expense.description}</Typography>
+                <Typography>${expense.amount}</Typography>
+              </Box>
+            ))}
+          </Box>
+        )}
 
         <Box display={'flex'} justifyContent={'right'} mt={2}>
             <Button
