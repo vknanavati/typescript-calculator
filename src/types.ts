@@ -10,6 +10,8 @@ export type SetAmount = React.Dispatch<React.SetStateAction<string>>
 
 export type SetTotal = React.Dispatch<React.SetStateAction<string>>
 
+export type SetExpenseDescription = React.Dispatch<React.SetStateAction<string>>
+
 export type HandleSubmitBudget = (e: React.FormEvent<HTMLFormElement>) => void
 
 export type HandleAddExpense = () => void
