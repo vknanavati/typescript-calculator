@@ -24,3 +24,11 @@ export type DialogOpenState = boolean
 
 export type HandleSaveExpense = () => void
 
+export interface Expense {
+    description: string;
+    amount: string;
+}
+
+export type Expenses = Expense[]
+
+export type SetExpenses = React.Dispatch<React.SetStateAction<Expenses[]>>
