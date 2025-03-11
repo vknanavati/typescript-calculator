@@ -1,27 +1,18 @@
-import { useState } from 'react';
 import { TextField, Button, Box, Typography } from '@mui/material';
-import {SetAmount, SetName, SetTotal, HandleSubmitBudget } from '../types';
+import {SetAmount, SetName, SetTotal, HandleSubmitBudget, SetInputAmount, SetInputName, InputAmount, InputName } from '../types';
 
 interface CreateBudgetProps {
     setName: SetName
     setAmount: SetAmount
     setTotal: SetTotal
-    handleSubmitBudget?: HandleSubmitBudget
+    handleSubmitBudget: HandleSubmitBudget
+    setInputAmount: SetInputAmount
+    setInputName: SetInputName
+    inputAmount: InputAmount
+    inputName: InputName
 }
 
-export function CreateBudget({setName, setTotal, setAmount}: CreateBudgetProps) {
-
-    const [inputName, setInputName] = useState("")
-    const [inputAmount, setInputAmount] = useState("")
-
-    const handleSubmitBudget: HandleSubmitBudget = (e) => {
-        e.preventDefault();
-        setName(inputName);
-        setAmount(inputAmount);
-        setTotal(inputAmount);
-        setInputName("");
-        setInputAmount("");
-    }
+export function CreateBudget({handleSubmitBudget, setInputAmount, setInputName, inputAmount, inputName}: CreateBudgetProps) {
 
     return (
         <form onSubmit={(e)=>handleSubmitBudget(e)}>
