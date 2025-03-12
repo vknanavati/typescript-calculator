@@ -1,10 +1,7 @@
 import { TextField, Button, Box, Typography } from '@mui/material';
-import {SetAmount, SetName, SetTotal, HandleSubmitBudget, SetInputAmount, SetInputName, InputAmount, InputName } from '../types';
+import {HandleSubmitBudget, SetInputAmount, SetInputName, InputAmount, InputName } from '../types';
 
 interface CreateBudgetProps {
-    setName: SetName
-    setAmount: SetAmount
-    setTotal: SetTotal
     handleSubmitBudget: HandleSubmitBudget
     setInputAmount: SetInputAmount
     setInputName: SetInputName
