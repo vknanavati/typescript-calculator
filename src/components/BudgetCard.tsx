@@ -2,15 +2,16 @@ import { Box, Typography, Button } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/joy/IconButton';
 
-import { Expenses, HandleAddExpense, ExpenseDescription, ExpenseAmount } from '../types';
+import { HandleDeleteExpense, Expenses, HandleAddExpense, ExpenseDescription, ExpenseAmount } from '../types';
 
 interface BudgetCardProps {
     item: ExpenseDescription
     amount: ExpenseAmount
     onAddExpense: HandleAddExpense
     expenses: Expenses
+    onDeleteExpense: HandleDeleteExpense
 }
-export function BudgetCard({expenses, onAddExpense}: BudgetCardProps) {
+export function BudgetCard({expenses, onAddExpense, onDeleteExpense}: BudgetCardProps) {
 
   return (
     <Box
@@ -36,7 +37,9 @@ export function BudgetCard({expenses, onAddExpense}: BudgetCardProps) {
               <Box key={index} display={"flex"} justifyContent={"space-between"}>
                 <Typography sx={{fontSize: 19}}>{expense.description}</Typography>
                 <Typography sx={{fontSize: 19}}>${expense.amount}</Typography>
-                <IconButton><DeleteIcon/></IconButton>
+                <IconButton onClick={()=>onDeleteExpense(expense.description)}>
+                  <DeleteIcon/>
+                </IconButton>
               </Box>
             ))}
 
