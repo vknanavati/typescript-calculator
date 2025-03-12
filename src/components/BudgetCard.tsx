@@ -21,8 +21,8 @@ export function BudgetCard({name, amount, total, onAddExpense, expenses}: Budget
         }}
     >
         <Box display={'flex'} justifyContent={'space-around'} gap={5}>
-            <Typography>{name}</Typography>
-            <Typography>{amount}/{total}</Typography>
+            <Typography variant="h5">{name}</Typography>
+            <Typography variant="h5">${amount}/${total}</Typography>
         </Box>
 
         {expenses.length > 0 && (
@@ -30,8 +30,8 @@ export function BudgetCard({name, amount, total, onAddExpense, expenses}: Budget
             <Typography variant="h6">Expenses:</Typography>
             {expenses.map((expense, index) => (
               <Box key={index} display="flex" justifyContent="space-between">
-                <Typography>{expense.description}</Typography>
-                <Typography>${expense.amount}</Typography>
+                <Typography sx={{fontSize: 19}}>{expense.description}</Typography>
+                <Typography sx={{fontSize: 19}}>${expense.amount}</Typography>
               </Box>
             ))}
           </Box>
