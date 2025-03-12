@@ -2,13 +2,16 @@ import { useState } from 'react';
 import { Container } from '@mui/material';
 import { BudgetCard } from './components/BudgetCard';
 import { AddExpenseForm } from './components/AddExpenseForm';
-import {HandleAddExpense, HandleCloseExpense, HandleSaveExpense, Expense } from './types';
+import { HandleDeleteExpense, HandleAddExpense, HandleCloseExpense, HandleSaveExpense, Expense } from './types';
 
 function App() {
-
+  //expenseDescription = item name entered by user
   const [expenseDescription, setExpenseDescription] = useState("")
+  //expenseAmount = dollar amount entered by user
   const [expenseAmount, setExpenseAmount] = useState("")
 
+  //array of objects containing expenseDescription and expenseAmount
+  //key are 'description' and 'amount'
   const [expenses, setExpenses] = useState<Expense[]>([])
 
   const [isOpenDialog, setIsOpenDialog] = useState(false)
@@ -23,16 +26,24 @@ function App() {
 
   const handleSaveExpense: HandleSaveExpense = () => {
 
-    if (expenseDescription && expenseAmount) {
-      setExpenses((prevExpenses)=> [
-        ...prevExpenses,
-        {description: expenseDescription, amount: expenseAmount}
-      ])
-    }
+    setExpenses((prevExpenses)=> [
+      ...prevExpenses,
+      { description: expenseDescription,
+         amount: expenseAmount
+      }])
+
+    console.log("expenses:", expenses)
 
     setExpenseAmount("")
     setExpenseDescription("")
     setIsOpenDialog(false)
+  }
+
+  const handleDeleteExpense: HandleDeleteExpense = (description) => {
+    setExpenses((prevExpenses) => prevExpenses.filter((expense)=> expense.description !== description))
+
+    console.log(`Deleting an expense entry: description sent to function- ${description}`)
+
   }
 
   return (
@@ -42,6 +53,7 @@ function App() {
         amount={expenseAmount}
         onAddExpense={handleAddExpense}
         expenses={expenses}
+        onDeleteExpense={handleDeleteExpense}
       />
       <AddExpenseForm
         open={isOpenDialog}
