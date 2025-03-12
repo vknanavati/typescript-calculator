@@ -40,7 +40,7 @@ export function BudgetCard({name, amount, total, onAddExpense, expenses}: Budget
         <Box display={'flex'} justifyContent={'right'} mt={2}>
             <Button
                 variant='contained'
-                onClick={onAddExpense}
+                onClick={()=>onAddExpense(name)}
             >
                 Add Expense
             </Button>
