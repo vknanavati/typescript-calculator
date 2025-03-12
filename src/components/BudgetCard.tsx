@@ -27,7 +27,7 @@ export function BudgetCard({expenses, onAddExpense}: BudgetCardProps) {
 
         <Box mt={2}>
 
-          <Box display={"flex"} gap={18} >
+          <Box display={"flex"} gap={18} mb={3} >
             <Typography>Expense Name</Typography>
             <Typography>Cost</Typography>
           </Box>
