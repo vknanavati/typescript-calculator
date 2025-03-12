@@ -1,4 +1,7 @@
 import { Box, Typography, Button } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/joy/IconButton';
+
 import { Amount, Name, Total, HandleAddExpense, Expenses } from '../types';
 
 interface BudgetCardProps {
@@ -28,12 +31,15 @@ export function BudgetCard({name, amount, total, onAddExpense, expenses}: Budget
         {expenses.length > 0 && (
           <Box mt={2}>
             <Typography variant="h6">Expenses:</Typography>
+
             {expenses.map((expense, index) => (
               <Box key={index} display="flex" justifyContent="space-between">
                 <Typography sx={{fontSize: 19}}>{expense.description}</Typography>
                 <Typography sx={{fontSize: 19}}>${expense.amount}</Typography>
+                <IconButton><DeleteIcon/></IconButton>
               </Box>
             ))}
+
           </Box>
         )}
 
