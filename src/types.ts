@@ -8,6 +8,10 @@ export type InputAmount = string
 
 export type InputName = string
 
+export type ExpenseDescription = string
+
+export type ExpenseAmount = string
+
 export type SetName = React.Dispatch<React.SetStateAction<string>>
 
 export type SetAmount = React.Dispatch<React.SetStateAction<string>>
@@ -24,7 +28,7 @@ export type SetInputName = React.Dispatch<React.SetStateAction<string>>
 
 export type HandleSubmitBudget = (e: React.FormEvent<HTMLFormElement>) => void
 
-export type HandleAddExpense = () => void
+export type HandleAddExpense = (e: React.MouseEvent<HTMLButtonElement>) => void
 
 export type HandleCloseExpense = () => void
 
@@ -44,8 +48,11 @@ export type SetExpenses = React.Dispatch<React.SetStateAction<Expenses[]>>
 export interface BudgetCardInfo {
     name: string;
     budget: string;
+    expenses: Expense[]
 }
 
 export type BudgetCardInfos = BudgetCardInfo[]
 
 export type SetAddedBudgets = React.Dispatch<React.SetStateAction<BudgetCardInfos[]>>
+
+export type SelectedBudget = string
