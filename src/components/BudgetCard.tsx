@@ -12,7 +12,6 @@ interface BudgetCardProps {
 }
 export function BudgetCard({expenses, onAddExpense}: BudgetCardProps) {
 
-
   return (
     <Box
         sx={{
@@ -22,24 +21,29 @@ export function BudgetCard({expenses, onAddExpense}: BudgetCardProps) {
             mt: 5
         }}
     >
-        <Box display={'flex'} justifyContent={'space-around'} gap={5}>
+        <Box display={"flex"} justifyContent={"space-around"} gap={5}>
             <Typography variant="h5">Cost of Living</Typography>
         </Box>
+
         <Box mt={2}>
-          <Typography variant="h6">Expenses:</Typography>
+
+          <Box display={"flex"} gap={18} >
+            <Typography>Expense Name</Typography>
+            <Typography>Cost</Typography>
+          </Box>
+
             {expenses.map((expense, index) => (
-              <Box key={index} display="flex" justifyContent="space-between">
+              <Box key={index} display={"flex"} justifyContent={"space-between"}>
                 <Typography sx={{fontSize: 19}}>{expense.description}</Typography>
                 <Typography sx={{fontSize: 19}}>${expense.amount}</Typography>
                 <IconButton><DeleteIcon/></IconButton>
               </Box>
-              ))}
+            ))}
+
         </Box>
-
-
-        <Box display={'flex'} justifyContent={'right'} mt={2}>
+        <Box display={"flex"} justifyContent={"right"} mt={2}>
             <Button
-                variant='contained'
+                variant="contained"
                 onClick={onAddExpense}
             >
                 Add Expense
