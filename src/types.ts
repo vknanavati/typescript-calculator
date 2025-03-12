@@ -30,6 +30,8 @@ export type HandleSubmitBudget = (e: React.FormEvent<HTMLFormElement>) => void
 
 export type HandleAddExpense = (e: React.MouseEvent<HTMLButtonElement>) => void
 
+export type HandleDeleteExpense = (description: string) => void
+
 export type HandleCloseExpense = () => void
 
 export type DialogOpenState = boolean
