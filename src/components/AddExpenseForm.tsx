@@ -16,7 +16,7 @@ export function AddExpenseForm({open, onCloseExpense, setExpenseDescription, set
         <DialogContent>
             <Box display={'flex'} gap={6}>
                 <TextField
-                    label="Description"
+                    label="Item"
                     variant="standard"
                     onChange={(e) => setExpenseDescription(e.target.value)}
                 />
