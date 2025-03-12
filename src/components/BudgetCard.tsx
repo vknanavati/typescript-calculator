@@ -2,16 +2,15 @@ import { Box, Typography, Button } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/joy/IconButton';
 
-import { Amount, Name, Total, HandleAddExpense, Expenses } from '../types';
+import { Expenses, HandleAddExpense, ExpenseDescription, ExpenseAmount } from '../types';
 
 interface BudgetCardProps {
-    name: Name
-    amount: Amount
-    total: Total
+    item: ExpenseDescription
+    amount: ExpenseAmount
     onAddExpense: HandleAddExpense
     expenses: Expenses
 }
-export function BudgetCard({name, amount, total, onAddExpense, expenses}: BudgetCardProps) {
+export function BudgetCard({expenses, onAddExpense}: BudgetCardProps) {
 
 
   return (
@@ -24,29 +23,24 @@ export function BudgetCard({name, amount, total, onAddExpense, expenses}: Budget
         }}
     >
         <Box display={'flex'} justifyContent={'space-around'} gap={5}>
-            <Typography variant="h5">{name}</Typography>
-            <Typography variant="h5">${amount}/${total}</Typography>
+            <Typography variant="h5">Cost of Living</Typography>
         </Box>
-
-        {expenses.length > 0 && (
-          <Box mt={2}>
-            <Typography variant="h6">Expenses:</Typography>
-
+        <Box mt={2}>
+          <Typography variant="h6">Expenses:</Typography>
             {expenses.map((expense, index) => (
               <Box key={index} display="flex" justifyContent="space-between">
                 <Typography sx={{fontSize: 19}}>{expense.description}</Typography>
                 <Typography sx={{fontSize: 19}}>${expense.amount}</Typography>
                 <IconButton><DeleteIcon/></IconButton>
               </Box>
-            ))}
+              ))}
+        </Box>
 
-          </Box>
-        )}
 
         <Box display={'flex'} justifyContent={'right'} mt={2}>
             <Button
                 variant='contained'
-                onClick={()=>onAddExpense(name)}
+                onClick={onAddExpense}
             >
                 Add Expense
             </Button>
