@@ -1,5 +1,5 @@
 import { Dialog, DialogContent, DialogTitle, TextField, Box, Button, DialogActions } from "@mui/material";
-import { DialogOpenState, HandleCloseExpense, SetExpenseDescription, SetExpenseAmount, HandleSaveExpense } from "../types";
+import { IsEdit, DialogOpenState, HandleCloseExpense, SetExpenseDescription, SetExpenseAmount, HandleSaveExpense } from "../types";
 
 interface AddExpenseFormProps {
     open: DialogOpenState
@@ -7,12 +7,15 @@ interface AddExpenseFormProps {
     setExpenseDescription: SetExpenseDescription
     setExpenseAmount: SetExpenseAmount
     onSaveExpense: HandleSaveExpense
+    isEdit: IsEdit
 }
 
-export function AddExpenseForm({open, onCloseExpense, setExpenseDescription, setExpenseAmount, onSaveExpense}: AddExpenseFormProps) {
+export function AddExpenseForm({isEdit, open, onCloseExpense, setExpenseDescription, setExpenseAmount, onSaveExpense}: AddExpenseFormProps) {
   return (
     <Dialog open={open}>
-        <DialogTitle>Expense</DialogTitle>
+        <DialogTitle>
+            {isEdit !== null ? "Edit Expense" : "Add Expense"}
+        </DialogTitle>
         <DialogContent>
             <Box display={'flex'} gap={6}>
                 <TextField
