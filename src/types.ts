@@ -62,3 +62,12 @@ export type SetAddedBudgets = React.Dispatch<React.SetStateAction<BudgetCardInfo
 export type SelectedBudget = string
 
 export type IsEdit = number | null
+
+export const categories = [
+    "Housing",
+    "Food",
+    "Beauty",
+    "Transportation",
+    "Savings",
+    "Entertainment"
+  ] as const;
