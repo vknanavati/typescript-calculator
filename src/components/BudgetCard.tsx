@@ -41,7 +41,7 @@ export function BudgetCard({expenses, onAddExpense, onDeleteExpense, onEditExpen
                 <Typography sx={{fontSize: 19}}>${expense.amount}</Typography>
 
                 <IconButton>
-                  <EditIcon onClick={()=>onEditExpense(expense.description)}/>
+                  <EditIcon onClick={()=>onEditExpense(index)}/>
                 </IconButton>
 
                 <IconButton onClick={()=>onDeleteExpense(expense.description)}>
