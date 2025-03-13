@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Container } from '@mui/material';
 import { BudgetCard } from './components/BudgetCard';
 import { AddExpenseForm } from './components/AddExpenseForm';
-import { IsEdit, HandleEditExpense, HandleDeleteExpense, HandleAddExpense, HandleCloseExpense, HandleSaveExpense, Expense } from './types';
+import { categories, IsEdit, HandleEditExpense, HandleDeleteExpense, HandleAddExpense, HandleCloseExpense, HandleSaveExpense, Expense } from './types';
 
 function App() {
   //expenseDescription = item name entered by user
@@ -110,6 +110,7 @@ function App() {
         onDeleteExpense={handleDeleteExpense}
         onEditExpense={handleEditExpense}
         total={total}
+        categories={categories}
       />
       <AddExpenseForm
         expenseDescription={expenseDescription}
