@@ -1,9 +1,9 @@
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography, Button, Divider } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/joy/IconButton';
 
-import { HandleEditExpense, HandleDeleteExpense, Expenses, HandleAddExpense, ExpenseDescription, ExpenseAmount } from '../types';
+import { Total, HandleEditExpense, HandleDeleteExpense, Expenses, HandleAddExpense, ExpenseDescription, ExpenseAmount } from '../types';
 
 interface BudgetCardProps {
     item: ExpenseDescription
@@ -12,8 +12,9 @@ interface BudgetCardProps {
     expenses: Expenses
     onDeleteExpense: HandleDeleteExpense
     onEditExpense: HandleEditExpense
+    total: Total
 }
-export function BudgetCard({expenses, onAddExpense, onDeleteExpense, onEditExpense}: BudgetCardProps) {
+export function BudgetCard({ total, expenses, onAddExpense, onDeleteExpense, onEditExpense }: BudgetCardProps) {
 
   return (
     <Box
@@ -51,6 +52,16 @@ export function BudgetCard({expenses, onAddExpense, onDeleteExpense, onEditExpen
             ))}
 
         </Box>
+
+        <Box>
+          <Divider/>
+        </Box>
+
+        <Box display={"flex"} justifyContent={"stretch"}>
+          <Typography sx={{fontSize: 19}}>Total</Typography>
+          <Typography sx={{fontSize: 19}}>${total}</Typography>
+        </Box>
+
         <Box display={"flex"} justifyContent={"right"} mt={2}>
             <Button
                 variant="contained"
@@ -59,6 +70,7 @@ export function BudgetCard({expenses, onAddExpense, onDeleteExpense, onEditExpen
                 Add Expense
             </Button>
         </Box>
+
     </Box>
   )
 }
