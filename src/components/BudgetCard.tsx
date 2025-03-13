@@ -1,9 +1,9 @@
-import { Box, Typography, Button, Divider } from '@mui/material';
+import { Box, Typography, Button, Divider, FormControl, InputLabel, Select } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/joy/IconButton';
 
-import { Total, HandleEditExpense, HandleDeleteExpense, Expenses, HandleAddExpense, ExpenseDescription, ExpenseAmount } from '../types';
+import { categories,Total, HandleEditExpense, HandleDeleteExpense, Expenses, HandleAddExpense, ExpenseDescription, ExpenseAmount } from '../types';
 
 interface BudgetCardProps {
     item: ExpenseDescription
@@ -13,8 +13,9 @@ interface BudgetCardProps {
     onDeleteExpense: HandleDeleteExpense
     onEditExpense: HandleEditExpense
     total: Total
+    categories: typeof categories
 }
-export function BudgetCard({ total, expenses, onAddExpense, onDeleteExpense, onEditExpense }: BudgetCardProps) {
+export function BudgetCard({ categories, total, expenses, onAddExpense, onDeleteExpense, onEditExpense }: BudgetCardProps) {
 
   return (
     <Box
@@ -39,6 +40,10 @@ export function BudgetCard({ total, expenses, onAddExpense, onDeleteExpense, onE
             {expenses.map((expense, index) => (
               <Box key={index} display={"flex"} justifyContent={"space-between"}>
                 <Typography sx={{fontSize: 19}}>{expense.description}</Typography>
+                <FormControl>
+                  <InputLabel>Category</InputLabel>
+                  <Select ></Select>
+                </FormControl>
                 <Typography sx={{fontSize: 19}}>${expense.amount}</Typography>
 
                 <IconButton>
