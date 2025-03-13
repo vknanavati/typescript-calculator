@@ -8,9 +8,11 @@ interface AddExpenseFormProps {
     setExpenseAmount: SetExpenseAmount
     onSaveExpense: HandleSaveExpense
     isEdit: IsEdit
+    expenseDescription: string
+    expenseAmount: string
 }
 
-export function AddExpenseForm({isEdit, open, onCloseExpense, setExpenseDescription, setExpenseAmount, onSaveExpense}: AddExpenseFormProps) {
+export function AddExpenseForm({isEdit, open, onCloseExpense, expenseDescription, expenseAmount, setExpenseDescription, setExpenseAmount, onSaveExpense}: AddExpenseFormProps) {
   return (
     <Dialog open={open}>
         <DialogTitle>
@@ -19,12 +21,12 @@ export function AddExpenseForm({isEdit, open, onCloseExpense, setExpenseDescript
         <DialogContent>
             <Box display={'flex'} gap={6}>
                 <TextField
-                    label="Item"
+                    label={isEdit !==null ? expenseDescription : "Item"}
                     variant="standard"
                     onChange={(e) => setExpenseDescription(e.target.value)}
                 />
                 <TextField
-                    label="Amount"
+                    label={isEdit !==null ? expenseAmount : "Amount"}
                     variant="standard"
                     onChange={(e) => setExpenseAmount(e.target.value)}
                 />
