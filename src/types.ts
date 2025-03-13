@@ -32,7 +32,7 @@ export type HandleAddExpense = (e: React.MouseEvent<HTMLButtonElement>) => void
 
 export type HandleDeleteExpense = (description: string) => void
 
-export type HandleEditExpense = (description: string) => void
+export type HandleEditExpense = (index: number) => void
 
 export type HandleCloseExpense = () => void
 
@@ -60,3 +60,5 @@ export type BudgetCardInfos = BudgetCardInfo[]
 export type SetAddedBudgets = React.Dispatch<React.SetStateAction<BudgetCardInfos[]>>
 
 export type SelectedBudget = string
+
+export type IsEdit = number | null
