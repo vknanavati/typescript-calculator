@@ -38,7 +38,8 @@ function App() {
     if (isEdit !== null) {
       //if index equals isEdit then update that object
       setExpenses(expenses.map((expense, index) =>
-        //condition is index must equal isEdit. This is how only the selected entry will be updated
+        //condition is index must equal isEdit. This is how only the selected entry will be updated.
+        //map will go through each entry until it finds the index === isEdit
         index === isEdit
           ? { description: expenseDescription, amount: expenseAmount }
           : expense
@@ -96,6 +97,8 @@ function App() {
         onEditExpense={handleEditExpense}
       />
       <AddExpenseForm
+        expenseDescription={expenseDescription}
+        expenseAmount={expenseAmount}
         open={isOpenDialog}
         onCloseExpense={handleCloseExpense}
         setExpenseDescription={setExpenseDescription}
