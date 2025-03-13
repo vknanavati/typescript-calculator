@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Container } from '@mui/material';
 import { BudgetCard } from './components/BudgetCard';
 import { AddExpenseForm } from './components/AddExpenseForm';
-import { HandleDeleteExpense, HandleAddExpense, HandleCloseExpense, HandleSaveExpense, Expense } from './types';
+import { HandleEditExpense, HandleDeleteExpense, HandleAddExpense, HandleCloseExpense, HandleSaveExpense, Expense } from './types';
 
 function App() {
   //expenseDescription = item name entered by user
@@ -39,6 +39,11 @@ function App() {
     setIsOpenDialog(false)
   }
 
+  const handleEditExpense: HandleEditExpense = (description) => {
+    setIsOpenDialog(true)
+
+  }
+
   const handleDeleteExpense: HandleDeleteExpense = (description) => {
     setExpenses((prevExpenses) => prevExpenses.filter((expense)=> expense.description !== description))
 
@@ -54,6 +59,7 @@ function App() {
         onAddExpense={handleAddExpense}
         expenses={expenses}
         onDeleteExpense={handleDeleteExpense}
+        onEditExpense={handleEditExpense}
       />
       <AddExpenseForm
         open={isOpenDialog}
