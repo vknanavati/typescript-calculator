@@ -14,6 +14,8 @@ function App() {
   //key are 'description' and 'amount'
   const [expenses, setExpenses] = useState<Expense[]>([])
 
+  const [total, setTotal] = useState("")
+
   const [isEdit, setIsEdit] = useState<IsEdit>(null)
 
   const [isOpenDialog, setIsOpenDialog] = useState(false)
@@ -22,7 +24,18 @@ function App() {
     console.log("updated expenseDescription: ", expenseDescription);
     console.log("updated expenseAmount: ", expenseAmount)
     console.log("updated expenses: ", expenses)
-  }, [expenseDescription, expenseAmount, expenses])
+  }, [expenseDescription, expenseAmount, expenses]);
+
+  useEffect(() => {
+    const calculateTotal = () => {
+      const totalAmount = expenses.reduce((sum, expense) => {
+        return sum + Number(expense.amount);
+      }, 0);
+
+      setTotal(totalAmount.toString())
+    };
+    calculateTotal();
+  }, [expenses]);
 
   const handleAddExpense: HandleAddExpense = () => {
     setIsOpenDialog(true);
@@ -86,8 +99,9 @@ function App() {
     console.log(`Deleting an expense entry: description sent to function- ${description}`);
   }
 
+
   return (
-    <Container sx={{mt: 5}}>
+    <Container sx={{ mt: 5 }}>
       <BudgetCard
         item={expenseDescription}
         amount={expenseAmount}
@@ -95,6 +109,7 @@ function App() {
         expenses={expenses}
         onDeleteExpense={handleDeleteExpense}
         onEditExpense={handleEditExpense}
+        total={total}
       />
       <AddExpenseForm
         expenseDescription={expenseDescription}
