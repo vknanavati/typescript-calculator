@@ -17,6 +17,8 @@ function App() {
 
   const [total, setTotal] = useState("")
 
+  const [category, setCategory] = useState("")
+
   const [isEdit, setIsEdit] = useState<IsEdit>(null)
 
   const [isOpenDialog, setIsOpenDialog] = useState(false)
@@ -25,7 +27,8 @@ function App() {
     console.log("updated expenseDescription: ", expenseDescription);
     console.log("updated expenseAmount: ", expenseAmount)
     console.log("updated expenses: ", expenses)
-  }, [expenseDescription, expenseAmount, expenses]);
+    console.log("category selected: ", category)
+  }, [expenseDescription, expenseAmount, expenses, category]);
 
   useEffect(() => {
     const calculateTotal = () => {
@@ -112,6 +115,7 @@ function App() {
         onEditExpense={handleEditExpense}
         total={total}
         categories={categories}
+        setCategory={setCategory}
       />
       <AnnualCard
         expenses={expenses}
