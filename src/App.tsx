@@ -3,7 +3,7 @@ import { Container } from '@mui/material';
 import { BudgetCard } from './components/BudgetCard';
 import { AddExpenseForm } from './components/AddExpenseForm';
 import { AnnualCard } from './components/AnnualCard';
-import { categories, IsEdit, HandleEditExpense, HandleDeleteExpense, HandleAddExpense, HandleCloseExpense, HandleSaveExpense, Expense } from './types';
+import { categories, IsEdit, HandleSetCategory, HandleEditExpense, HandleDeleteExpense, HandleAddExpense, HandleCloseExpense, HandleSaveExpense, Expense } from './types';
 
 function App() {
   //expenseDescription = item name entered by user
@@ -17,8 +17,6 @@ function App() {
 
   const [total, setTotal] = useState("")
 
-  const [category, setCategory] = useState("")
-
   const [isEdit, setIsEdit] = useState<IsEdit>(null)
 
   const [isOpenDialog, setIsOpenDialog] = useState(false)
@@ -27,8 +25,7 @@ function App() {
     console.log("updated expenseDescription: ", expenseDescription);
     console.log("updated expenseAmount: ", expenseAmount)
     console.log("updated expenses: ", expenses)
-    console.log("category selected: ", category)
-  }, [expenseDescription, expenseAmount, expenses, category]);
+  }, [expenseDescription, expenseAmount, expenses]);
 
   useEffect(() => {
     const calculateTotal = () => {
@@ -103,6 +100,15 @@ function App() {
     console.log(`Deleting an expense entry: description sent to function- ${description}`);
   }
 
+  const handleSetCategory: HandleSetCategory = (index, selectedCategory) => {
+    setExpenses((prevExpenses) =>
+      prevExpenses.map((prevExpense, i) =>
+      i === index
+        ? {...prevExpense, category: selectedCategory}
+        : prevExpense
+      )
+    )
+  }
 
   return (
     <Container sx={{ mt: 5 }}>
@@ -115,7 +121,7 @@ function App() {
         onEditExpense={handleEditExpense}
         total={total}
         categories={categories}
-        setCategory={setCategory}
+        handleSetCategory={handleSetCategory}
       />
       <AnnualCard
         expenses={expenses}
