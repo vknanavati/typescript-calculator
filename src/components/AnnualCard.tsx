@@ -1,13 +1,11 @@
 import { Box, Typography } from '@mui/material';
-import { ExpenseDescription, ExpenseAmount, Expenses  } from '../types';
+import { Expenses  } from '../types';
 
 interface AnnualCardProps {
-  expenseDescription: ExpenseDescription
-  expenseAmount: ExpenseAmount
   expenses: Expenses
 }
 
-export function AnnualCard({expenses, expenseDescription, expenseAmount}: AnnualCardProps) {
+export function AnnualCard({expenses}: AnnualCardProps) {
   return (
     <Box
       sx={{
