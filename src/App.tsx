@@ -114,8 +114,6 @@ function App() {
         categories={categories}
       />
       <AnnualCard
-        expenseDescription={expenseDescription}
-        expenseAmount={expenseAmount}
         expenses={expenses}
       />
       <AddExpenseForm
