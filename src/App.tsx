@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Container } from '@mui/material';
 import { BudgetCard } from './components/BudgetCard';
 import { AddExpenseForm } from './components/AddExpenseForm';
+import { AnnualCard } from './components/AnnualCard';
 import { categories, IsEdit, HandleEditExpense, HandleDeleteExpense, HandleAddExpense, HandleCloseExpense, HandleSaveExpense, Expense } from './types';
 
 function App() {
@@ -112,6 +113,7 @@ function App() {
         total={total}
         categories={categories}
       />
+      <AnnualCard/>
       <AddExpenseForm
         expenseDescription={expenseDescription}
         expenseAmount={expenseAmount}
