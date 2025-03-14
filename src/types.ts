@@ -26,8 +26,6 @@ export type SetInputAmount = React.Dispatch<React.SetStateAction<string>>
 
 export type SetInputName = React.Dispatch<React.SetStateAction<string>>
 
-export type SetCategory = (category: string) => void
-
 export type HandleSubmitBudget = (e: React.FormEvent<HTMLFormElement>) => void
 
 export type HandleAddExpense = (e: React.MouseEvent<HTMLButtonElement>) => void
@@ -35,6 +33,8 @@ export type HandleAddExpense = (e: React.MouseEvent<HTMLButtonElement>) => void
 export type HandleDeleteExpense = (description: string) => void
 
 export type HandleEditExpense = (index: number) => void
+
+export type HandleSetCategory = (index: number, selectedCategory: string) => void
 
 export type HandleCloseExpense = () => void
 
