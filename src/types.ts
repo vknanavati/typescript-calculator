@@ -26,6 +26,8 @@ export type SetInputAmount = React.Dispatch<React.SetStateAction<string>>
 
 export type SetInputName = React.Dispatch<React.SetStateAction<string>>
 
+export type SetCategory = (category: string) => void
+
 export type HandleSubmitBudget = (e: React.FormEvent<HTMLFormElement>) => void
 
 export type HandleAddExpense = (e: React.MouseEvent<HTMLButtonElement>) => void
@@ -67,6 +69,7 @@ export const categories = [
     "Housing",
     "Food",
     "Beauty",
+    "Health",
     "Transportation",
     "Savings",
     "Entertainment"
