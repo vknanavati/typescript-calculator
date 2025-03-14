@@ -113,7 +113,11 @@ function App() {
         total={total}
         categories={categories}
       />
-      <AnnualCard/>
+      <AnnualCard
+        expenseDescription={expenseDescription}
+        expenseAmount={expenseAmount}
+        expenses={expenses}
+      />
       <AddExpenseForm
         expenseDescription={expenseDescription}
         expenseAmount={expenseAmount}
