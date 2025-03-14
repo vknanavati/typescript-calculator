@@ -1,9 +1,9 @@
-import { MenuItem, Box, Typography, Button, Divider, FormControl, InputLabel, Select } from '@mui/material';
+import { MenuItem, Box, Typography, Button, Divider, FormControl, InputLabel, Select, SelectChangeEvent } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/joy/IconButton';
 
-import { categories, Total, HandleEditExpense, HandleDeleteExpense, Expenses, HandleAddExpense, ExpenseDescription, ExpenseAmount } from '../types';
+import { SetCategory, categories, Total, HandleEditExpense, HandleDeleteExpense, Expenses, HandleAddExpense, ExpenseDescription, ExpenseAmount } from '../types';
 
 interface BudgetCardProps {
     item: ExpenseDescription
@@ -14,8 +14,9 @@ interface BudgetCardProps {
     onEditExpense: HandleEditExpense
     total: Total
     categories: typeof categories
+    setCategory: SetCategory
 }
-export function BudgetCard({ categories, total, expenses, onAddExpense, onDeleteExpense, onEditExpense }: BudgetCardProps) {
+export function BudgetCard({ setCategory, categories, total, expenses, onAddExpense, onDeleteExpense, onEditExpense }: BudgetCardProps) {
 
   return (
     <Box
@@ -45,6 +46,7 @@ export function BudgetCard({ categories, total, expenses, onAddExpense, onDelete
                   <InputLabel>Category</InputLabel>
                   <Select
                     label="categories"
+                    onChange={(e: SelectChangeEvent<string>) => setCategory(e.target.value)}
                   >
                     {categories.map((category, index)=>{
                       return <MenuItem key={index} value={category}>{category}</MenuItem>
