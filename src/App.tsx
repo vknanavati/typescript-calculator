@@ -171,8 +171,8 @@ function App() {
 
   return (
     <Container sx={{ mt: 5 }}>
-      <Box sx={{ display: "flex", gap: 3 }}>
-        <Box sx={{ flex: 1, display: "flex", flexDirection: "column", gap: 4 }}>
+      <Box sx={{ display: "flex"}}>
+        <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
           <BudgetCard
             item={expenseDescription}
             amount={expenseAmount}
@@ -189,7 +189,7 @@ function App() {
           />
         </Box>
 
-        <Box sx={{flex: 1}}>
+        <Box sx={{flex: 3, display: "flex", justifyContent: "flex-end"}}>
           <PieChart
               expenses={expenses}
             />
