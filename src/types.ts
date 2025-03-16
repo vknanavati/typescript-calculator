@@ -12,6 +12,10 @@ export type ExpenseDescription = string
 
 export type ExpenseAmount = string
 
+export type ExpenseAmountError = string
+
+export type FormSubmitted = boolean
+
 export type SetName = React.Dispatch<React.SetStateAction<string>>
 
 export type SetAmount = React.Dispatch<React.SetStateAction<string>>
@@ -29,6 +33,8 @@ export type SetInputName = React.Dispatch<React.SetStateAction<string>>
 export type HandleSubmitBudget = (e: React.FormEvent<HTMLFormElement>) => void
 
 export type HandleAddExpense = (e: React.MouseEvent<HTMLButtonElement>) => void
+
+export type HandleExpenseAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => void
 
 export type HandleDeleteExpense = (description: string) => void
 
