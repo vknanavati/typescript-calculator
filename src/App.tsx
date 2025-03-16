@@ -70,7 +70,9 @@ function App() {
 
     const userInput = e.target.value;
 
-    if (/^(?:[A-Z][a-z]*)(?:\s[A-Z][a-z]*)*$/.test(userInput) || userInput === "") {
+    console.log("userInput expenseDescription: ", userInput)
+
+    if (/^[A-Z][a-z ]*(?:\s[A-Z][a-z ]*)*$/.test(userInput) || userInput === "") {
       setExpenseDescription(userInput);
     }
   };
@@ -89,7 +91,7 @@ function App() {
       setExpenseAmountError("")
     };
 
-    if (!/^(?:[A-Z][a-z]*)(?:\s[A-Z][a-z]*)*$/.test(expenseDescription)) {
+    if (!/^[A-Z][a-z ]*(?:\s[A-Z][a-z ]*)*$/.test(expenseDescription)) {
       setExpenseDescriptionError("Please enter valid description");
       valid = false;
     } else {
