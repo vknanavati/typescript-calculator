@@ -3,7 +3,7 @@ import { Container } from '@mui/material';
 import { BudgetCard } from './components/BudgetCard';
 import { AddExpenseForm } from './components/AddExpenseForm';
 import { AnnualCard } from './components/AnnualCard';
-import { HandleExpenseAmountChange, categories, IsEdit, HandleSetCategory, HandleEditExpense, HandleDeleteExpense, HandleAddExpense, HandleCloseExpense, HandleSaveExpense, Expense } from './types';
+import { HandleExpenseDescriptionChange, HandleExpenseAmountChange, categories, IsEdit, HandleSetCategory, HandleEditExpense, HandleDeleteExpense, HandleAddExpense, HandleCloseExpense, HandleSaveExpense, Expense } from './types';
 
 function App() {
   //expenseDescription = item name entered by user
@@ -18,6 +18,8 @@ function App() {
   const [total, setTotal] = useState("")
 
   const [expenseAmountError, setExpenseAmountError] = useState("")
+
+  const [expenseDescriptionError, setExpenseDescriptionError] = useState("")
 
   const [formSubmitted, setFormSubmitted] = useState(false)
 
@@ -49,6 +51,9 @@ function App() {
   const handleCloseExpense: HandleCloseExpense = () => {
     setIsEdit(null);
     setExpenseAmountError("");
+    setExpenseDescriptionError("");
+    setExpenseAmount("");
+    setExpenseDescription("");
     setIsOpenDialog(false);
   };
 
@@ -61,14 +66,37 @@ function App() {
     }
   };
 
+  const handleExpenseDescriptionChange: HandleExpenseDescriptionChange = (e) => {
+
+    const userInput = e.target.value;
+
+    if (/^(?:[A-Z][a-z]*)(?:\s[A-Z][a-z]*)*$/.test(userInput) || userInput === "") {
+      setExpenseDescription(userInput);
+    }
+  };
+
   const handleSaveExpense: HandleSaveExpense = () => {
 
     setFormSubmitted(true);
 
+    let valid = true;
+
+    // requires at least one digit or decimal format in order to submit
     if (!/^(?:\d+|\.\d{1,2}|\d+\.\d{1,2})$/.test(expenseAmount)) {
       setExpenseAmountError("Please enter valid amount");
-      return;
-    }
+      valid = false;
+    } else {
+      setExpenseAmountError("")
+    };
+
+    if (!/^(?:[A-Z][a-z]*)(?:\s[A-Z][a-z]*)*$/.test(expenseDescription)) {
+      setExpenseDescriptionError("Please enter valid description");
+      valid = false;
+    } else {
+      setExpenseDescriptionError("")
+    };
+
+    if (!valid) return
 
     //edit expense if isEdit not null
     if (isEdit !== null) {
@@ -160,7 +188,9 @@ function App() {
         onSaveExpense={handleSaveExpense}
         isEdit={isEdit}
         handleExpenseAmountChange={handleExpenseAmountChange}
+        handleExpenseDescriptionChange={handleExpenseDescriptionChange}
         expenseAmountError={expenseAmountError}
+        expenseDescriptionError={expenseDescriptionError}
         formSubmitted={formSubmitted}
       />
    </Container>
