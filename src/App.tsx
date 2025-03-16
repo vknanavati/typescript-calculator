@@ -3,7 +3,7 @@ import { Container } from '@mui/material';
 import { BudgetCard } from './components/BudgetCard';
 import { AddExpenseForm } from './components/AddExpenseForm';
 import { AnnualCard } from './components/AnnualCard';
-import { categories, IsEdit, HandleSetCategory, HandleEditExpense, HandleDeleteExpense, HandleAddExpense, HandleCloseExpense, HandleSaveExpense, Expense } from './types';
+import { HandleExpenseAmountChange, categories, IsEdit, HandleSetCategory, HandleEditExpense, HandleDeleteExpense, HandleAddExpense, HandleCloseExpense, HandleSaveExpense, Expense } from './types';
 
 function App() {
   //expenseDescription = item name entered by user
@@ -16,6 +16,10 @@ function App() {
   const [expenses, setExpenses] = useState<Expense[]>([])
 
   const [total, setTotal] = useState("")
+
+  const [expenseAmountError, setExpenseAmountError] = useState("")
+
+  const [formSubmitted, setFormSubmitted] = useState(false)
 
   const [isEdit, setIsEdit] = useState<IsEdit>(null)
 
@@ -40,14 +44,32 @@ function App() {
 
   const handleAddExpense: HandleAddExpense = () => {
     setIsOpenDialog(true);
-  }
+  };
 
   const handleCloseExpense: HandleCloseExpense = () => {
     setIsEdit(null);
+    setExpenseAmountError("");
     setIsOpenDialog(false);
-  }
+  };
+
+  const handleExpenseAmountChange: HandleExpenseAmountChange = (e) => {
+
+    const userInput = e.target.value;
+
+    if (/^\d*\.?\d{0,2}$/.test(userInput) || userInput === "") {
+      setExpenseAmount(userInput);
+    }
+  };
 
   const handleSaveExpense: HandleSaveExpense = () => {
+
+    setFormSubmitted(true);
+
+    if (!/^(?:\d+|\.\d{1,2}|\d+\.\d{1,2})$/.test(expenseAmount)) {
+      setExpenseAmountError("Please enter valid amount");
+      return;
+    }
+
     //edit expense if isEdit not null
     if (isEdit !== null) {
       //if index equals isEdit then update that object
@@ -57,11 +79,9 @@ function App() {
         index === isEdit
           ? { description: expenseDescription, amount: expenseAmount }
           : expense
-      ))
-      // setExpenses(updatedExpenses);
-      setIsEdit(null);
+      ));
 
-      // console.log("updatedExpenses: ", updatedExpenses);
+      setIsEdit(null);
 
     } else {
       //else add new expense
@@ -69,10 +89,12 @@ function App() {
         ...prevExpenses,
         { description: expenseDescription, amount: expenseAmount }
       ])
-    }
+    };
 
     setExpenseAmount("");
     setExpenseDescription("");
+    setExpenseAmountError("");
+    setFormSubmitted(false);
     setIsOpenDialog(false);
   }
 
@@ -81,6 +103,8 @@ function App() {
     //expense is located in an object in an array
     //selectedEdit is set to object the user wants to edit
     //selectedEdit variable needed to access description key and amount key in array of expenses object
+
+    //selectedEdit = {description: 'car insurance', amount: '125', category: 'Transportation'}
     const selectedEdit = expenses[index];
 
     setExpenseDescription(selectedEdit.description);
@@ -108,7 +132,7 @@ function App() {
         : prevExpense
       )
     )
-  }
+  };
 
   return (
     <Container sx={{ mt: 5 }}>
@@ -135,6 +159,9 @@ function App() {
         setExpenseAmount={setExpenseAmount}
         onSaveExpense={handleSaveExpense}
         isEdit={isEdit}
+        handleExpenseAmountChange={handleExpenseAmountChange}
+        expenseAmountError={expenseAmountError}
+        formSubmitted={formSubmitted}
       />
    </Container>
   );
