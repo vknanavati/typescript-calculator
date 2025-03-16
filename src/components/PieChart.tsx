@@ -12,6 +12,7 @@ interface PieChartProps {
 }
 
 export function PieChart({ expenses }: PieChartProps) {
+
     //chartData holds the labels(categories) and values for the chart
     const [chartData, setChartData] = useState<any>({});
 
@@ -29,7 +30,7 @@ export function PieChart({ expenses }: PieChartProps) {
         if (!category) return;
 
         //convert amount to a number
-        const amount = parseFloat(expense.amount);
+        const amount = Number(expense.amount);
 
         // if the category exists add the amount
         if (categoryTotals[category]) {
@@ -60,12 +61,11 @@ export function PieChart({ expenses }: PieChartProps) {
     }, [expenses]);
 
     return (
-        <Box>
-
+        <Box sx={{ width: "50%", height:"400px"}}>
             {chartData.labels && chartData.labels.length > 0 ? (
                 <Box>
                     <Typography>Expense Distribution by Category</Typography>
-                    <Pie data={chartData} />
+                    <Pie data={chartData}/>
                 </Box>
             ) : (
                 <Typography>No data to display</Typography>
