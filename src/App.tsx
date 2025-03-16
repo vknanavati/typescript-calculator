@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Container } from '@mui/material';
+import { Container, Box } from '@mui/material';
 import { BudgetCard } from './components/BudgetCard';
 import { AddExpenseForm } from './components/AddExpenseForm';
 import { AnnualCard } from './components/AnnualCard';
+import { PieChart } from './components/PieChart';
 import { HandleExpenseDescriptionChange, HandleExpenseAmountChange, categories, IsEdit, HandleSetCategory, HandleEditExpense, HandleDeleteExpense, HandleAddExpense, HandleCloseExpense, HandleSaveExpense, Expense } from './types';
 
 function App() {
@@ -170,20 +171,31 @@ function App() {
 
   return (
     <Container sx={{ mt: 5 }}>
-      <BudgetCard
-        item={expenseDescription}
-        amount={expenseAmount}
-        onAddExpense={handleAddExpense}
-        expenses={expenses}
-        onDeleteExpense={handleDeleteExpense}
-        onEditExpense={handleEditExpense}
-        total={total}
-        categories={categories}
-        handleSetCategory={handleSetCategory}
-      />
-      <AnnualCard
-        expenses={expenses}
-      />
+      <Box sx={{ display: "flex", gap: 3 }}>
+        <Box sx={{ flex: 1, display: "flex", flexDirection: "column", gap: 4 }}>
+          <BudgetCard
+            item={expenseDescription}
+            amount={expenseAmount}
+            onAddExpense={handleAddExpense}
+            expenses={expenses}
+            onDeleteExpense={handleDeleteExpense}
+            onEditExpense={handleEditExpense}
+            total={total}
+            categories={categories}
+            handleSetCategory={handleSetCategory}
+          />
+          <AnnualCard
+            expenses={expenses}
+          />
+        </Box>
+
+        <Box sx={{flex: 1}}>
+          <PieChart
+              expenses={expenses}
+            />
+        </Box>
+      </Box>
+
       <AddExpenseForm
         expenseDescription={expenseDescription}
         expenseAmount={expenseAmount}
