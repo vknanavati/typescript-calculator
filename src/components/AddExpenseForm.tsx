@@ -19,7 +19,7 @@ interface AddExpenseFormProps {
 
 export function AddExpenseForm({ formSubmitted, expenseAmountError, expenseDescriptionError, handleExpenseDescriptionChange, handleExpenseAmountChange, isEdit, open, onCloseExpense, expenseDescription, expenseAmount, setExpenseDescription, setExpenseAmount, onSaveExpense }: AddExpenseFormProps) {
   return (
-      <Dialog open={open}>
+      <Dialog open={open} onClose={onCloseExpense}>
         <DialogTitle>{isEdit !== null ? "Edit Expense" : "Add Expense"}</DialogTitle>
         <form onSubmit={onSaveExpense}>
             <DialogContent>
