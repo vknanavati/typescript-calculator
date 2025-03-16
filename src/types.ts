@@ -50,7 +50,7 @@ export type HandleCloseExpense = () => void
 
 export type DialogOpenState = boolean
 
-export type HandleSaveExpense = () => void
+export type HandleSaveExpense = (e: React.FormEvent<HTMLFormElement>) => void
 
 export interface Expense {
     description: string;
