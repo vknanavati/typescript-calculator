@@ -61,10 +61,10 @@ export function PieChart({ expenses }: PieChartProps) {
     }, [expenses]);
 
     return (
-        <Box sx={{ width: "50%", height:"400px"}}>
+        <Box sx={{ width: "80%", height:"400px"}}>
             {chartData.labels && chartData.labels.length > 0 ? (
                 <Box>
-                    <Typography>Expense Distribution by Category</Typography>
+                    <Typography sx={{textAlign: "center"}}>Monthly Expense by Category</Typography>
                     <Pie data={chartData}/>
                 </Box>
             ) : (
