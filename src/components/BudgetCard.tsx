@@ -46,6 +46,8 @@ export function BudgetCard({ handleSetCategory, categories, total, expenses, onA
                   <InputLabel>Category</InputLabel>
                   <Select
                     label="categories"
+                    value={expense.category || ""}
+                    defaultValue=""
                     onChange={(e: SelectChangeEvent<string>) => handleSetCategory(index, e.target.value)}
                   >
                     {categories.map((category, index)=>{
