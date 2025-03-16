@@ -77,7 +77,11 @@ function App() {
     }
   };
 
-  const handleSaveExpense: HandleSaveExpense = () => {
+  const handleSaveExpense: HandleSaveExpense = (e) => {
+
+    console.log("Form Submitted")
+
+    e.preventDefault();
 
     setFormSubmitted(true);
 
