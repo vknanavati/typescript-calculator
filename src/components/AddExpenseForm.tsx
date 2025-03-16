@@ -1,5 +1,5 @@
 import { Dialog, DialogContent, DialogTitle, TextField, Box, Button, DialogActions } from "@mui/material";
-import { IsEdit, DialogOpenState, HandleCloseExpense, SetExpenseDescription, SetExpenseAmount, HandleSaveExpense } from "../types";
+import { FormSubmitted, ExpenseDescriptionError, ExpenseAmountError, HandleExpenseDescriptionChange, HandleExpenseAmountChange, IsEdit, DialogOpenState, HandleCloseExpense, SetExpenseDescription, SetExpenseAmount, HandleSaveExpense } from "../types";
 
 interface AddExpenseFormProps {
     open: DialogOpenState
@@ -10,25 +10,44 @@ interface AddExpenseFormProps {
     isEdit: IsEdit
     expenseDescription: string
     expenseAmount: string
+    handleExpenseAmountChange: HandleExpenseAmountChange
+    handleExpenseDescriptionChange: HandleExpenseDescriptionChange
+    expenseAmountError: ExpenseAmountError
+    expenseDescriptionError: ExpenseDescriptionError
+    formSubmitted: FormSubmitted
 }
 
-export function AddExpenseForm({isEdit, open, onCloseExpense, expenseDescription, expenseAmount, setExpenseDescription, setExpenseAmount, onSaveExpense}: AddExpenseFormProps) {
+export function AddExpenseForm({ formSubmitted, expenseAmountError, expenseDescriptionError, handleExpenseDescriptionChange, handleExpenseAmountChange, isEdit, open, onCloseExpense, expenseDescription, expenseAmount, setExpenseDescription, setExpenseAmount, onSaveExpense }: AddExpenseFormProps) {
   return (
     <Dialog open={open}>
         <DialogTitle>
             {isEdit !== null ? "Edit Expense" : "Add Expense"}
         </DialogTitle>
         <DialogContent>
-            <Box display={'flex'} gap={6}>
+            <Box display={"flex"} gap={6}>
                 <TextField
                     label={isEdit !==null ? expenseDescription : "Item"}
                     variant="standard"
-                    onChange={(e) => setExpenseDescription(e.target.value)}
+                    value={expenseDescription}
+                    error={!!expenseDescriptionError && formSubmitted}
+                    helperText={formSubmitted && expenseDescriptionError ? expenseDescriptionError: ""}
+                    onChange={handleExpenseDescriptionChange}
+                    // onChange={(e) => setExpenseDescription(e.target.value)}
                 />
                 <TextField
                     label={isEdit !==null ? expenseAmount : "Amount"}
                     variant="standard"
-                    onChange={(e) => setExpenseAmount(e.target.value)}
+                    value={expenseAmount}
+                    // !! converts expenseAmountError into a boolean
+                    // error prop expects a boolean value
+                    // if expenseAmountError contains error message it is true
+                    // error = {true} only when error message exists
+                    // && formSubmitted so error only shows after form is submitted
+                    error={!!expenseAmountError && formSubmitted}
+                    // error message only appears if formSubmitted true and expenseAmountError exists
+                    // ? expenseAmountError : "" - helper text empty string if expenseAmountError doesn't exist
+                    helperText={formSubmitted && expenseAmountError ? expenseAmountError : ""}
+                    onChange={handleExpenseAmountChange}
                 />
             </Box>
         </DialogContent>
