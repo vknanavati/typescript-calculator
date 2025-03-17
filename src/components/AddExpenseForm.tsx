@@ -1,4 +1,4 @@
-import { FormControl, Select, MenuItem, Dialog, DialogContent, DialogTitle, TextField, Box, Button, DialogActions, SelectChangeEvent } from "@mui/material";
+import { FormControl, Select, MenuItem, Dialog, DialogContent, DialogTitle, TextField, Box, Button, DialogActions, SelectChangeEvent, InputLabel } from "@mui/material";
 import { Expenses, HandleSetCategory, categories, FormSubmitted, ExpenseDescriptionError, ExpenseAmountError, HandleExpenseDescriptionChange, HandleExpenseAmountChange, IsEdit, DialogOpenState, HandleCloseExpense, SetExpenseDescription, SetExpenseAmount, HandleSaveExpense, selectedCategory } from "../types";
 
 interface AddExpenseFormProps {
@@ -53,10 +53,11 @@ export function AddExpenseForm({ selectedCategory, handleSetCategory, categories
                         onChange={handleExpenseAmountChange}
                     />
 
-                    <Box display={"flex"} justifyContent={"space-between"} mb={3}>
-                        <FormControl sx={{ width: 120 }} size="small">
+
+                        <FormControl sx={{ width: 150 }} size="small">
+                        <InputLabel>Categories</InputLabel>
                         <Select
-                            label="categories"
+                            label="Categories"
                             value={selectedCategory}
                             defaultValue=""
                             onChange={(e: SelectChangeEvent<string>) =>
@@ -71,8 +72,9 @@ export function AddExpenseForm({ selectedCategory, handleSetCategory, categories
                         </Select>
                         </FormControl>
                     </Box>
-                </Box>
+
             </DialogContent>
+
             <DialogActions>
                     <Button type="submit">Add</Button>
                     <Button onClick={onCloseExpense}>Cancel</Button>
