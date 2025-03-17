@@ -1,4 +1,4 @@
-import { Typography, FormControl, InputLabel, Select, MenuItem, Dialog, DialogContent, DialogTitle, TextField, Box, Button, DialogActions, SelectChangeEvent } from "@mui/material";
+import { FormControl, Select, MenuItem, Dialog, DialogContent, DialogTitle, TextField, Box, Button, DialogActions, SelectChangeEvent } from "@mui/material";
 import { Expenses, HandleSetCategory, categories, FormSubmitted, ExpenseDescriptionError, ExpenseAmountError, HandleExpenseDescriptionChange, HandleExpenseAmountChange, IsEdit, DialogOpenState, HandleCloseExpense, SetExpenseDescription, SetExpenseAmount, HandleSaveExpense, selectedCategory } from "../types";
 
 interface AddExpenseFormProps {
@@ -63,8 +63,8 @@ export function AddExpenseForm({ selectedCategory, handleSetCategory, categories
                                 handleSetCategory(e.target.value)
                             }
                         >
-                            {categories.map((category, idx) => (
-                            <MenuItem key={idx} value={category}>
+                            {categories.map((category, index) => (
+                            <MenuItem key={index} value={category}>
                                 {category}
                             </MenuItem>
                             ))}
