@@ -18,6 +18,8 @@ export type ExpenseDescriptionError = string
 
 export type FormSubmitted = boolean
 
+export type selectedCategory = string
+
 export type SetName = React.Dispatch<React.SetStateAction<string>>
 
 export type SetAmount = React.Dispatch<React.SetStateAction<string>>
@@ -44,7 +46,7 @@ export type HandleDeleteExpense = (description: string) => void
 
 export type HandleEditExpense = (index: number) => void
 
-export type HandleSetCategory = (index: number, selectedCategory: string) => void
+export type HandleSetCategory = (selectedCategory: string) => void
 
 export type HandleCloseExpense = () => void
 
