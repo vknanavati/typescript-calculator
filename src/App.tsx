@@ -111,11 +111,9 @@ function App() {
       setExpenseDescriptionError("")
     };
 
-
-
     if (!valid) return
 
-    //edit expense if isEdit not null
+    //edit expense if isEdit not null aka true
     if (isEdit !== null) {
       //if index equals isEdit then update that object
       setExpenses(expenses.map((expense, index) =>
@@ -155,6 +153,7 @@ function App() {
 
     setExpenseDescription(selectedEdit.description);
     setExpenseAmount(selectedEdit.amount);
+    setSelectedCategory(selectedEdit.category || "")
 
     setIsEdit(index);
     setIsOpenDialog(true);
