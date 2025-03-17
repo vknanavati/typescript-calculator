@@ -170,8 +170,9 @@ function App() {
   }
 
   return (
-    <Container sx={{ mt: 5 }}>
+    <Container sx={{ mt: 5, mb: 10 }}>
       <Box sx={{ display: "flex"}}>
+
         <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
           <BudgetCard
             item={expenseDescription}
@@ -184,6 +185,7 @@ function App() {
           />
           <AnnualCard
             expenses={expenses}
+            total={total}
           />
         </Box>
 
@@ -192,6 +194,7 @@ function App() {
               expenses={expenses}
             />
         </Box>
+
       </Box>
 
       <AddExpenseForm
