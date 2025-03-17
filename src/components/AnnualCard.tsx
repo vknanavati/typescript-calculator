@@ -1,11 +1,12 @@
-import { Box, Typography } from '@mui/material';
-import { Expenses  } from '../types';
+import { Box, Typography, Divider } from '@mui/material';
+import { Expenses, Total  } from '../types';
 
 interface AnnualCardProps {
   expenses: Expenses
+  total: Total
 }
 
-export function AnnualCard({ expenses }: AnnualCardProps) {
+export function AnnualCard({ expenses, total }: AnnualCardProps) {
 
   return (
 
@@ -14,11 +15,13 @@ export function AnnualCard({ expenses }: AnnualCardProps) {
         border: '1px solid ',
         padding: 3,
         width: 500,
-        mt: 5
-      }}>
+        mt: 5,
+      }}
+    >
        <Box display={"flex"} justifyContent={"space-around"} gap={5}>
             <Typography variant="h5">Annual Costs </Typography>
         </Box>
+
         <Box>
           {expenses.map((expense, index)=> (
             <Box key={index} display={"flex"} justifyContent={"space-between"}>
@@ -27,6 +30,16 @@ export function AnnualCard({ expenses }: AnnualCardProps) {
             </Box>
           ))}
         </Box>
+
+        <Box mt={1}>
+          <Divider/>
+        </Box>
+
+        <Box display={"flex"} justifyContent={"space-between"} mt={2}>
+          <Typography sx={{ fontSize: 21, fontWeight: "bold"}}>Total</Typography>
+          <Typography sx={{ fontSize: 21, fontWeight: "bold"}}>${(Number(total)*12).toFixed(2)}</Typography>
+        </Box>
+
     </Box>
   )
 }
