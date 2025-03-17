@@ -19,12 +19,12 @@ export function AnnualCard({ expenses, total }: AnnualCardProps) {
       }}
     >
        <Box display={"flex"} justifyContent={"space-around"} gap={5}>
-            <Typography variant="h5">Annual Costs </Typography>
+            <Typography variant="h5" mb={2}>Annual Costs</Typography>
         </Box>
 
         <Box>
           {expenses.map((expense, index)=> (
-            <Box key={index} display={"flex"} justifyContent={"space-between"}>
+            <Box key={index} display={"flex"} justifyContent={"space-between"} mb={2}>
               <Typography>{expense.description}</Typography>
               <Typography>${(Number(expense.amount) * 12).toFixed(2)}</Typography>
             </Box>
