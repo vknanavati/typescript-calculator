@@ -25,6 +25,7 @@ export function AddExpenseForm({ selectedCategory, handleSetCategory, categories
   return (
       <Dialog open={open} onClose={onCloseExpense}>
         <DialogTitle>{isEdit !== null ? "Edit Expense" : "Add Expense"}</DialogTitle>
+
         <form onSubmit={onSaveExpense}>
             <DialogContent>
                 <Box display={"flex"} gap={6}>
@@ -53,13 +54,11 @@ export function AddExpenseForm({ selectedCategory, handleSetCategory, categories
                         onChange={handleExpenseAmountChange}
                     />
 
-
                         <FormControl sx={{ width: 150 }} size="small">
                         <InputLabel>Categories</InputLabel>
                         <Select
                             label="Categories"
                             value={selectedCategory}
-                            defaultValue=""
                             onChange={(e: SelectChangeEvent<string>) =>
                                 handleSetCategory(e.target.value)
                             }
@@ -72,7 +71,6 @@ export function AddExpenseForm({ selectedCategory, handleSetCategory, categories
                         </Select>
                         </FormControl>
                     </Box>
-
             </DialogContent>
 
             <DialogActions>
