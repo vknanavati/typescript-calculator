@@ -1,5 +1,5 @@
-import { Dialog, DialogContent, DialogTitle, TextField, Box, Button, DialogActions } from "@mui/material";
-import { FormSubmitted, ExpenseDescriptionError, ExpenseAmountError, HandleExpenseDescriptionChange, HandleExpenseAmountChange, IsEdit, DialogOpenState, HandleCloseExpense, SetExpenseDescription, SetExpenseAmount, HandleSaveExpense } from "../types";
+import { Typography, FormControl, InputLabel, Select, MenuItem, Dialog, DialogContent, DialogTitle, TextField, Box, Button, DialogActions, SelectChangeEvent } from "@mui/material";
+import { Expenses, HandleSetCategory, categories, FormSubmitted, ExpenseDescriptionError, ExpenseAmountError, HandleExpenseDescriptionChange, HandleExpenseAmountChange, IsEdit, DialogOpenState, HandleCloseExpense, SetExpenseDescription, SetExpenseAmount, HandleSaveExpense, selectedCategory } from "../types";
 
 interface AddExpenseFormProps {
     open: DialogOpenState
@@ -15,9 +15,13 @@ interface AddExpenseFormProps {
     expenseAmountError: ExpenseAmountError
     expenseDescriptionError: ExpenseDescriptionError
     formSubmitted: FormSubmitted
+    categories: typeof categories
+    handleSetCategory: HandleSetCategory
+    expenses: Expenses
+    selectedCategory: selectedCategory
 }
 
-export function AddExpenseForm({ formSubmitted, expenseAmountError, expenseDescriptionError, handleExpenseDescriptionChange, handleExpenseAmountChange, isEdit, open, onCloseExpense, expenseDescription, expenseAmount, setExpenseDescription, setExpenseAmount, onSaveExpense }: AddExpenseFormProps) {
+export function AddExpenseForm({ selectedCategory, handleSetCategory, categories, formSubmitted, expenseAmountError, expenseDescriptionError, handleExpenseDescriptionChange, handleExpenseAmountChange, isEdit, open, onCloseExpense, expenseDescription, expenseAmount, onSaveExpense }: AddExpenseFormProps) {
   return (
       <Dialog open={open} onClose={onCloseExpense}>
         <DialogTitle>{isEdit !== null ? "Edit Expense" : "Add Expense"}</DialogTitle>
@@ -48,6 +52,25 @@ export function AddExpenseForm({ formSubmitted, expenseAmountError, expenseDescr
                         helperText={formSubmitted && expenseAmountError ? expenseAmountError : ""}
                         onChange={handleExpenseAmountChange}
                     />
+
+                    <Box display={"flex"} justifyContent={"space-between"} mb={3}>
+                        <FormControl sx={{ width: 120 }} size="small">
+                        <Select
+                            label="categories"
+                            value={selectedCategory}
+                            defaultValue=""
+                            onChange={(e: SelectChangeEvent<string>) =>
+                                handleSetCategory(e.target.value)
+                            }
+                        >
+                            {categories.map((category, idx) => (
+                            <MenuItem key={idx} value={category}>
+                                {category}
+                            </MenuItem>
+                            ))}
+                        </Select>
+                        </FormControl>
+                    </Box>
                 </Box>
             </DialogContent>
             <DialogActions>
