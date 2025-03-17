@@ -58,6 +58,7 @@ function App() {
     setExpenseDescriptionError("");
     setExpenseAmount("");
     setExpenseDescription("");
+    setSelectedCategory("");
     setIsOpenDialog(false);
   };
 
@@ -79,6 +80,10 @@ function App() {
     if (/^[A-Z][a-z ]*(?:\s[A-Z][a-z ]*)*$/.test(userInput) || userInput === "") {
       setExpenseDescription(userInput);
     }
+  };
+
+  const handleSetCategory: HandleSetCategory = (selectedCategory) => {
+    setSelectedCategory(selectedCategory)
   };
 
   const handleSaveExpense: HandleSaveExpense = (e) => {
@@ -164,10 +169,6 @@ function App() {
 
     console.log(`Deleting an expense entry: description sent to function- ${description}`);
   }
-
-  const handleSetCategory: HandleSetCategory = (selectedCategory) => {
-    setSelectedCategory(selectedCategory)
-  };
 
   return (
     <Container sx={{ mt: 5 }}>
