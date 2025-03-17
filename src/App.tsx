@@ -22,6 +22,8 @@ function App() {
 
   const [expenseDescriptionError, setExpenseDescriptionError] = useState("")
 
+  const [selectedCategory, setSelectedCategory] = useState("")
+
   const [formSubmitted, setFormSubmitted] = useState(false)
 
   const [isEdit, setIsEdit] = useState<IsEdit>(null)
@@ -31,8 +33,9 @@ function App() {
   useEffect(()=>{
     console.log("updated expenseDescription: ", expenseDescription);
     console.log("updated expenseAmount: ", expenseAmount)
+    console.log("updated selectedCategory: ", selectedCategory)
     console.log("updated expenses: ", expenses)
-  }, [expenseDescription, expenseAmount, expenses]);
+  }, [expenseDescription, expenseAmount, selectedCategory, expenses]);
 
   useEffect(() => {
     const calculateTotal = () => {
@@ -103,6 +106,8 @@ function App() {
       setExpenseDescriptionError("")
     };
 
+
+
     if (!valid) return
 
     //edit expense if isEdit not null
@@ -112,7 +117,7 @@ function App() {
         //condition is index must equal isEdit. This is how only the selected entry will be updated.
         //map will go through each entry until it finds the index === isEdit
         index === isEdit
-          ? { description: expenseDescription, amount: expenseAmount }
+          ? { description: expenseDescription, amount: expenseAmount, category: selectedCategory }
           : expense
       ));
 
@@ -122,13 +127,14 @@ function App() {
       //else add new expense
       setExpenses((prevExpenses) => [
         ...prevExpenses,
-        { description: expenseDescription, amount: expenseAmount }
+        { description: expenseDescription, amount: expenseAmount, category: selectedCategory }
       ])
     };
 
     setExpenseAmount("");
     setExpenseDescription("");
     setExpenseAmountError("");
+    setSelectedCategory("");
     setFormSubmitted(false);
     setIsOpenDialog(false);
   }
@@ -159,14 +165,8 @@ function App() {
     console.log(`Deleting an expense entry: description sent to function- ${description}`);
   }
 
-  const handleSetCategory: HandleSetCategory = (index, selectedCategory) => {
-    setExpenses((prevExpenses) =>
-      prevExpenses.map((prevExpense, i) =>
-      i === index
-        ? {...prevExpense, category: selectedCategory}
-        : prevExpense
-      )
-    )
+  const handleSetCategory: HandleSetCategory = (selectedCategory) => {
+    setSelectedCategory(selectedCategory)
   };
 
   return (
@@ -181,8 +181,6 @@ function App() {
             onDeleteExpense={handleDeleteExpense}
             onEditExpense={handleEditExpense}
             total={total}
-            categories={categories}
-            handleSetCategory={handleSetCategory}
           />
           <AnnualCard
             expenses={expenses}
@@ -210,6 +208,11 @@ function App() {
         expenseAmountError={expenseAmountError}
         expenseDescriptionError={expenseDescriptionError}
         formSubmitted={formSubmitted}
+        categories={categories}
+        handleSetCategory={handleSetCategory}
+        expenses={expenses}
+        selectedCategory={selectedCategory}
+
       />
    </Container>
   );
